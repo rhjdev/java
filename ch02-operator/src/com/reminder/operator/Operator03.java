@@ -30,13 +30,13 @@ public class Operator03 {
 		System.out.println("YES OR NO = " + result);
 		
 		int score1 = 98;
-		String pass1 = (score1 >= 80) ? "합격입니다." : ((1 <= score1 && score1 <= 100) ? "불합격입니다." : "잘못 입력하셨습니다. 점수를 입력해 주세요.");
+		String pass1 = (score1 >= 80) ? "합격입니다." : ((1 <= score1 && score1 < 80) ? "불합격입니다." : "잘못 입력하셨습니다. 점수를 입력해 주세요.");
 		System.out.println("합격 여부 = " + pass1);
 		int score2 = 34;
-		String pass2 = (score2 >= 80) ? "합격입니다." : ((1 <= score2 && score2 <= 100) ? "불합격입니다." : "잘못 입력하셨습니다. 점수를 입력해 주세요.");
+		String pass2 = (score2 >= 80) ? "합격입니다." : ((1 <= score2 && score2 < 80) ? "불합격입니다." : "잘못 입력하셨습니다. 점수를 입력해 주세요.");
 		System.out.println("합격 여부 = " + pass2);
 		int score3 = 0;
-		String pass3 = (score3 >= 80) ? "합격입니다." : ((1 <= score3 && score3 <= 100) ? "불합격입니다." : "잘못 입력하셨습니다. 점수를 입력해 주세요.");
+		String pass3 = (score3 >= 80) ? "합격입니다." : ((1 <= score3 && score3 < 80) ? "불합격입니다." : "잘못 입력하셨습니다. 점수를 입력해 주세요.");
 		System.out.println("합격 여부 = " + pass3);
 		
 	}
