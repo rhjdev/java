@@ -3,13 +3,13 @@ package com.reminder.collection_practice.videocreator.model.dto;
 import java.util.Arrays;
 
 public class CreatorDTO {
-	
+
 	/* 제목, 화질, 길이, 자막 종류 */
 	private String title;
 	private int length;
 	private int[] quality;
 	private String[] sub;
-	
+
 	public CreatorDTO() {}
 
 	public CreatorDTO(String title, int length, int[] quality, String[] sub) {
@@ -54,7 +54,7 @@ public class CreatorDTO {
 
 	@Override
 	public String toString() {
-		return "CreatorDTO [title=" + title + ", length=" + length + ", quality=" + Arrays.toString(quality) + ", sub="
+		return "CreatorDTO [title=" + title + ", length=" + (length / 60) + "분 " + (length % 60) + "초" + ", quality=" + Arrays.toString(quality) + ", sub="
 				+ Arrays.toString(sub) + "]";
 	}
 

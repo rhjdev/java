@@ -1,6 +1,7 @@
 package com.reminder.collection_practice.videocreator.view;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
@@ -34,6 +35,7 @@ public class CreatorMenu {
 			
 			System.out.print("메뉴 선택 : ");
 			int menu = scan.nextInt();
+			scan.nextLine();
 			
 			switch(menu) {
 			case 1 : addList(); break;
@@ -45,6 +47,7 @@ public class CreatorMenu {
 			case 7 : updateVid(); break;
 			case 8 : removeVid(); break;
 			case 0 : System.out.println("프로그램을 종료합니다."); break mainMenu;
+			default : System.out.println("잘못 선택하셨습니다. 번호를 다시 입력해 주세요."); break;
 			}
 		}
 	}
@@ -54,7 +57,7 @@ public class CreatorMenu {
 		/* A. 제목 */
 		System.out.print("제목 입력 : ");
 		String title = scan.nextLine();
-		scan.nextLine();
+		
 		/* B. 길이
 		 * 초 단위로 입력 받고 x분 y초로 출력 */
 		System.out.print("길이 입력(초) : ");
@@ -86,12 +89,6 @@ public class CreatorMenu {
 		
 		
 		creatorController.addList(new CreatorDTO(title, length, quality, sub));
-//		if(qltyCount > 4) {
-//			System.out.println("최대 설정 가능 화질 개수는 4개입니다.");
-//		}
-//		if(subCount > 4) {
-//			System.out.println("최대 설정 가능 자막 개수는 4개입니다.");
-//		}
 	}
 	
 	public void selectList() {
@@ -116,7 +113,7 @@ public class CreatorMenu {
 		System.out.print("메뉴 선택 : ");
 		char menu = scan.next().charAt(0);
 		
-		ascDesc((char)menu);
+		ascDesc(menu);
 	}
 	
 	public void ascDesc(char menu) {
@@ -124,6 +121,8 @@ public class CreatorMenu {
 		List<CreatorDTO> vidList = creatorController.selectList();
 		/* 사본에 정렬 반영 */
 		List<CreatorDTO> sortList = new ArrayList<>();
+		sortList.addAll(vidList);
+		
 		if(menu == 'A') {
 			/* 익명클래스 사용 */
 			sortList.sort(new Comparator<CreatorDTO>() {
@@ -149,7 +148,8 @@ public class CreatorMenu {
 	public void searchTitle() {
 		System.out.println("======== 제목 검색 ========");
 		System.out.print("제목 입력 : ");
-		List<CreatorDTO> searchList = creatorController.searchTitle(scan.nextLine());
+		String title = scan.nextLine();
+		List<CreatorDTO> searchList = creatorController.searchTitle(title);
 		
 		if(!searchList.isEmpty()) {
 			for(int i=0; i < searchList.size(); i++) {
@@ -160,28 +160,49 @@ public class CreatorMenu {
 		}
 	}
 	
-	public void searchSub() {}
-//		System.out.println("======== 자막 검색 ========");
-//		System.out.print("자막 입력 : ");
-//		String input = scan.nextLine();
-//		
-//		List<CreatorDTO> searchList = creatorController.searchSub.get(i).
-//		
-//		if(!searchList.isEmpty()) {
-//			for(int i=0; i < searchList.size(); i++) {
-//				System.out.println(searchList.get(i));
-//			}
-//		} else {
-//			System.out.println("검색 결과가 없습니다.");
-//		}
-//	}
-	public void searchQlty() {}
+	public void searchSub() {
+		System.out.println("======== 자막 검색 ========");
+		System.out.println("# 자막 구분(KOR, ENG, IDN, SPN)");
+		System.out.print("자막 입력(택 1) : ");
+		String sub = scan.nextLine();
+		
+		List<CreatorDTO> vidList = creatorController.selectList();
+
+		for(CreatorDTO vid : vidList) {
+			if(!vidList.isEmpty()) {
+				if(Arrays.toString(vid.getSub()).contains(sub)) {
+					System.out.println(vid);
+				} else {
+				System.out.println("검색 결과가 없습니다.");
+				}
+			}
+		}
+	}
+
+	public void searchQlty() {
+		System.out.println("======== 화질 검색 ========");
+		System.out.println("# 화질 구분(2160, 1080, 720, 480)");
+		System.out.print("화질 입력(택 1) : ");
+		String quality = scan.nextLine();
+		
+		List<CreatorDTO> vidList = creatorController.selectList();
+
+		for(CreatorDTO vid : vidList) {
+			if(!vidList.isEmpty()) {
+				if(Arrays.toString(vid.getQuality()).contains(quality)) {
+					System.out.println(vid);
+				} else {
+				System.out.println("검색 결과가 없습니다.");
+				}
+			}
+		}
+	}
 	public void updateVid() {
 		System.out.println("======== 영상 정보 수정 ========");
-		System.out.println("기존 영상 제목 검색 : ");
+		System.out.print("기존 영상 제목 검색 : ");
 		String title = scan.nextLine();
 		
-		System.out.println("수정할 영상 제목 : ");
+		System.out.print("수정할 영상 제목 : ");
 		String updateTitle = scan.nextLine();
 		System.out.print("수정할 길이 입력(초) : ");
 		int updateLength = scan.nextInt();
@@ -207,7 +228,7 @@ public class CreatorMenu {
 	}
 	public void removeVid() {
 		System.out.println("======== 영상 삭제 ========");
-		System.out.println("삭제할 영상 제목 : ");
+		System.out.print("삭제할 영상 제목 : ");
 		int result = creatorController.removeVid(scan.nextLine());
 		
 		if(result > 0) {

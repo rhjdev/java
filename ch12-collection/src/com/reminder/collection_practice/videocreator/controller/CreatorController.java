@@ -33,32 +33,6 @@ public class CreatorController {
 		return searchList;
 	}
 	
-	/* 자막별 검색 - 배열[]이므로 equals */
-	public List<CreatorDTO> searchSub(String[] sub) {
-		/* 자막 종류 검색해 해당 키워드가 포함되는 영상들만 리턴 받기 위한 메소드 */
-		List<CreatorDTO> searchList = new ArrayList<>();
-		CreatorDTO vid = new CreatorDTO();
-		for(int i=0; i < vidList.size(); i++) {
-			if(vidList.get(i).getSub().equals(sub)) {
-				searchList.add(vid);
-			}
-		}
-		return searchList;
-	}
-	
-	/* 화질별 검색 - 배열[]이므로 equals */
-	public List<CreatorDTO> searchQlty(int[] quality) {
-		/* 화질 종류 검색해 해당 키워드가 포함되는 영상들만 리턴 받기 위한 메소드 */
-		List<CreatorDTO> searchList = new ArrayList<>();
-		CreatorDTO vid = new CreatorDTO();
-		for(int i=0; i < vidList.size(); i++) {
-			if(vidList.get(i).getSub().equals(quality)) {
-				searchList.add(vid);
-			}
-		}
-		return searchList;
-	}
-	
 	/* 영상 수정 - title 기준으로 조회 */
 	public int updateVid(String title, CreatorDTO updateVid) {
 		CreatorDTO old = null;

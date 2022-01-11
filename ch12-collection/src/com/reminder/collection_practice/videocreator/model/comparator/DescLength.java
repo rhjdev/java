@@ -8,7 +8,7 @@ public class DescLength implements Comparator<CreatorDTO> {
 
 	@Override
 	public int compare(CreatorDTO o1, CreatorDTO o2) {
-		return o1.getLength() - o2.getLength();
+		return o2.getLength() - o1.getLength();
 	}
 
 }
